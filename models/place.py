@@ -4,9 +4,9 @@ from curses import setupterm
 from os import getenv
 from re import A
 from sys import settrace
-from AirBnB_clone_v2.models import amenity
+from models.amenity import Amenity
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey, Integer, Float
+from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from sqlalchemy.orm import relationship
 
 place_amenity = Table('place_amenity', Base.metadata, Column('place_id',

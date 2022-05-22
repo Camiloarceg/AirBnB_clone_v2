@@ -53,19 +53,18 @@ def deploy():
 
 def do_clean(number=0):
     """  deletes out-of-date archives """
-    if number == 0:
-        number = 1
-    n_delete = int(
-        local("ls -1t versions | wc -l", capture=True)) - int(number)
-    files = local("ls -1t versions | tail -{}".format(n_delete), capture=True)
+    int_number = int(number)
+    if int_number == 0:
+        int_number = 1
+    files = local("ls -1t versions", capture=True)
     files_names = files.split("\n")
-    for myFile in files_names:
+    for myFile in files_names[int_number:]:
         local('rm versions/{}'.format(myFile))
 
-    n_delete = int(run("ls -1t /data/web_static/releases | wc -l",
-                       capture=True)) - int(number)
-    files = run("ls -1t /data/web_static/releases | tail -{}".format(
-        n_delete), capture=True)
-    files_names = files.split("\n")
-    for myFile in files_names:
-        run('rm /data/web_static/releases/{}'.format(myFile))
+    files_server = run("ls -1t /data/web_static/releases")
+    files_names_server = files_server.split("\n")
+    print(files_names_server)
+    for myFile in files_names_server[int_number:]:
+        if myFile is 'test':
+            continue
+        run('rm -rf /data/web_static/releases/{}'.format(myFile))

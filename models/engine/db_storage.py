@@ -3,7 +3,7 @@
 
 from os import getenv
 from sqlalchemy.orm import relationship
-from sqlalchemy import (create_engine)
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base, BaseModel
 from models.amenity import Amenity
@@ -70,5 +70,8 @@ class DBStorage:
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(
             bind=self.__engine, expire_on_commit=False)
-        Session = scoped_session(session_factory)
-        self.__session = Session()
+        self.__session = scoped_session(session_factory)
+
+    def close(self):
+        """ close method """
+        self.__session.remove()

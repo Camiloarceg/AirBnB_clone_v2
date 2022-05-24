@@ -22,7 +22,7 @@ def hbnb():
 def c(text):
     """ c funtion """
     text = text.replace('_', ' ')
-    return f"C {text}"
+    return "C {}".format(text)
 
 
 @app.route('/python')
@@ -30,7 +30,7 @@ def c(text):
 def python(text="is cool"):
     """ python funtion """
     text = text.replace('_', ' ')
-    return f"Python {text}"
+    return "Python {}".format(text)
 
 
 if __name__ == "__main__":

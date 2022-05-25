@@ -45,11 +45,11 @@ class DBStorage:
             for myclass in self.classes:
                 result = self.__session.query(myclass).all()
                 for obj in result:
-                    mydict[f"{obj.__class__}.{obj.id}"] = obj
+                    mydict["{}.{}".format(obj.__class__, obj.id)] = obj
         else:
             result = self.__session.query(cls).all()
             for obj in result:
-                mydict[f"{obj.__class__}.{obj.id}"] = obj
+                mydict["{}.{}".format(obj.__class__, obj.id)] = obj
         return mydict
 
     def new(self, obj):
